@@ -14,7 +14,7 @@ import NavbarPrimary from './components/NavbarPrimary.vue'
     </div>
 
     <div class="d-lg-flex">
-      <div class="my-3 col-lg-5">
+      <div class="mt-3 mb-5 col-lg-5">
         <ListTodoUnChecked />
       </div>
 
