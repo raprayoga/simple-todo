@@ -1,6 +1,6 @@
 import { computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { getItemFromLocalStorage, setItemToLocalStorage } from '../utils/store'
+import { getItemFromLocalStorage, setItemToLocalStorage } from '@/utils/store'
 
 export const useTodoListSore = defineStore('todo-list', () => {
   const todos = reactive<Todo[]>(getItemFromLocalStorage('todo') || [])
@@ -13,10 +13,11 @@ export const useTodoListSore = defineStore('todo-list', () => {
     return todos.filter((todo) => todo.isAccept)
   })
 
-  function addNewItem(name: string): void {
+  function addNewItem({ name, description }: TodoValue): void {
     todos.push({
       id: Math.floor(Math.random() * 1000),
-      name: name,
+      name,
+      description,
       isAccept: false
     })
 

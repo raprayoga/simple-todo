@@ -3,38 +3,66 @@
 
   <div v-if="listUnchecked.length > 0">
     <div
-      class="form-check d-flex justify-content-between"
+      class="form-check d-flex justify-content-between border-bottom py-2"
       v-for="todo of listUnchecked"
       :key="todo.name"
     >
-      <div class="col-10">
+      <div class="col-9">
         <input
           class="form-check-input"
           type="checkbox"
           :checked="todo.isAccept"
           @click="handleChangeStatus(todo)"
         />
-        <label class="form-check-label" for="flexCheckDefault">{{ todo.name }}</label>
+        <div class="accordion-item">
+          <button
+            class="accordion-button fw-semibold d-lg-none"
+            type="button"
+            data-bs-toggle="collapse"
+            :data-bs-target="`#collapse${todo.id}`"
+            aria-expanded="true"
+            :aria-controls="`collapse${todo.id}`"
+          >
+            {{ todo.name }}
+          </button>
+          <label class="d-none d-lg-block">
+            {{ todo.name }}
+          </label>
+          <div
+            :id="`collapse${todo.id}`"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body text-body-secondary">
+              {{ todo.description }}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div style="height: 30px; width: 30px" div class="btn-group col-2">
+      <div style="height: 30px; width: 30px" div class="btn-group col-2 d-lg-none">
         <div data-bs-toggle="dropdown" aria-expanded="false">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-three-dots-vertical"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-            />
-          </svg>
+          <i class="bi bi-three-dots-vertical"></i>
         </div>
         <ul class="dropdown-menu bg-danger text-light" @click="handleDelete(todo.id)">
           <li class="text-center">Delete</li>
         </ul>
+      </div>
+
+      <div style="height: fit-content" class="col-3 gap-1 d-none d-lg-flex">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm col-6"
+          data-bs-toggle="collapse"
+          :data-bs-target="`#collapse${todo.id}`"
+          aria-expanded="true"
+          :aria-controls="`collapse${todo.id}`"
+        >
+          Show Desc
+        </button>
+        <button type="button" class="btn btn-danger btn-sm col-6" @click="handleDelete(todo.id)">
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -46,7 +74,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useTodoListSore } from '../stores/todo-list'
+import { useTodoListSore } from '@/stores/todo-list'
 
 const todoListStore = useTodoListSore()
 const { listUnchecked } = storeToRefs(todoListStore)
