@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "https://simple-todo-green.vercel.app/:path*",
-      "destination": "https://simple-todo-green.vercel.app/:path*"
-    }
-  ]
-}
