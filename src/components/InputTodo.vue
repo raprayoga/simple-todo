@@ -29,9 +29,9 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useTodoListSore } from '@/stores/todo-list'
+import { useTodoListStore } from '@/stores/todo-list'
 
-const store = useTodoListSore()
+const store = useTodoListStore()
 
 const input = reactive<TodoValue>({
   name: '',

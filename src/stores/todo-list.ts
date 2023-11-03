@@ -2,16 +2,14 @@ import { computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { getItemFromLocalStorage, setItemToLocalStorage } from '@/utils/store'
 
-export const useTodoListSore = defineStore('todo-list', () => {
+export const useTodoListStore = defineStore('todo-list', () => {
   const todos = reactive<Todo[]>(getItemFromLocalStorage('todo') || [])
 
-  const listUnchecked = computed<Todo[]>(() => {
-    return todos.filter((todo) => !todo.isAccept)
-  })
+  const listTodo = computed<Todo[]>(() => todos)
 
-  const listChecked = computed<Todo[]>(() => {
-    return todos.filter((todo) => todo.isAccept)
-  })
+  const listUnchecked = computed<Todo[]>(() => todos.filter((todo) => !todo.isAccept))
+
+  const listChecked = computed<Todo[]>(() => todos.filter((todo) => todo.isAccept))
 
   function addNewItem({ name, description }: TodoValue): void {
     todos.push({
@@ -42,5 +40,5 @@ export const useTodoListSore = defineStore('todo-list', () => {
     setItemToLocalStorage('todo', todos)
   }
 
-  return { listUnchecked, listChecked, addNewItem, toggleStatus, deleteItem }
+  return { listTodo, listUnchecked, listChecked, addNewItem, toggleStatus, deleteItem }
 })

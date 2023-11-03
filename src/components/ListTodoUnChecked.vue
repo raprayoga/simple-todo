@@ -74,9 +74,9 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useTodoListSore } from '@/stores/todo-list'
+import { useTodoListStore } from '@/stores/todo-list'
 
-const todoListStore = useTodoListSore()
+const todoListStore = useTodoListStore()
 const { listUnchecked } = storeToRefs(todoListStore)
 
 const handleChangeStatus = (todo: Todo) => {
