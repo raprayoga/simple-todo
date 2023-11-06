@@ -7,5 +7,14 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*", "**/*.test.ts"],
+  "paths": {
+    "@/*": ["./src/*"]
+  }
 }
